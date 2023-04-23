@@ -1,0 +1,22 @@
+.section {
+  padding-top: 100px ;
+}
+
+.container {
+  max-width: 1440p;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+.header {
+  visibility: hidden;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
