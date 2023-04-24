@@ -1,0 +1,38 @@
+.form {
+  margin-bottom: 25px;
+}
+
+.inputAddTask {
+  display: block;
+  width: 100%;
+  max-width: 370px;
+  margin-bottom: 25px;
+  padding: 19px 15px;
+  background-color: #F4F4F4;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+  color: #333333;
+  outline: none;
+  border: none;
+}
+
+.inputAddTask::placeholder {
+  color: #999999;
+}
+
+
+.btnAdd {
+  padding: 19px 50px;
+  background-color: var(--green-color);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btnAdd:hover {
+  background-color: var(--green-hover-color);
+}

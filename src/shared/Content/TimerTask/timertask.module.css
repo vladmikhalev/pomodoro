@@ -30,13 +30,16 @@
 
 .content {
   display: flex;
-  padding: 70px 0;
+  padding: 70px 0 107px 0;
   flex-direction: column;
   align-items: center;
   background-color: #F4F4F4;
 }
 
 .timer {
+  display: flex;
+  margin-left: 75px;
+  align-items: center;
   font-style: normal;
   font-weight: 200;
   font-size: 150px;

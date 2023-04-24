@@ -1,20 +1,20 @@
 import React from 'react';
-import { BtnAddTasks } from './BtnAddTasks';
 import { Description } from './Description';
-import { InputAddTasks } from './InputAddTasks';
 import styles from './content.module.css';
 import { TimerTask } from './TimerTask';
+import { TaskList } from './TaskList';
+import { FormAddTask } from './FormAddTask';
 
 export function Content() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <h1 className={styles.header}>Скрытый заголовок</h1>
+        <h1 className={styles.header}>Pomodoro</h1>
         <div className={styles.content}>
           <div className={styles.blockDescr}>
             <Description />
-            <InputAddTasks />
-            <BtnAddTasks />
+            <FormAddTask />
+            <TaskList />
           </div>
           <TimerTask />
         </div>

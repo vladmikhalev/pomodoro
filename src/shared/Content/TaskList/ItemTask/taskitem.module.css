@@ -1,0 +1,47 @@
+.itemTask {
+  display: flex;
+  align-items: center;
+  ;
+
+  width: 100%;
+  max-width: 370px;
+}
+
+
+.itemTask {
+  position: relative;
+  padding: 10px 0;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+  color: #333333;
+}
+
+.itemTask::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #E4E4E4;
+}
+
+.itemTask::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #E4E4E4;
+}
+
+.number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #C4C4C4;
+  border-radius: 100%;
+  margin-right: 10px;
+}

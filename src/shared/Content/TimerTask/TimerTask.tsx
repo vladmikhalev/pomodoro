@@ -1,4 +1,5 @@
 import React from 'react';
+import { BtnAddTime } from './BtnAddTime';
 import { BtnStart } from './BtnStart';
 import { BtnStop } from './BtnStop';
 import styles from './timertask.module.css';
@@ -11,7 +12,9 @@ export function TimerTask() {
         <span className={styles.numberPomodor}>Помидор 1</span>
       </div>
       <div className={styles.content}>
-        <span className={styles.timer}>25:00</span>
+        <div className={styles.timer}>25:00
+          <BtnAddTime />
+        </div>
         <span className={styles.task}>
           <span className={styles.numberTask}>Задача 1 - </span>
           Сверстать сайт
