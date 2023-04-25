@@ -1,8 +1,6 @@
 .itemTask {
   display: flex;
   align-items: center;
-  ;
-
   width: 100%;
   max-width: 370px;
 }
@@ -11,6 +9,10 @@
 .itemTask {
   position: relative;
   padding: 10px 0;
+}
+
+.text {
+  max-width: 300px;
   font-weight: 300;
   font-size: 16px;
   line-height: 17px;
@@ -44,4 +46,8 @@
   border: 1px solid #C4C4C4;
   border-radius: 100%;
   margin-right: 10px;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+  color: #333333;
 }

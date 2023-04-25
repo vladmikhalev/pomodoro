@@ -10,8 +10,8 @@ export function TaskList() {
   
   return (
     <ul className={styles.cardList}>
-      {tasks.map((task: Task) => (
-        <TaskItem title={task.title} key={task.id}/>
+      {tasks.length !== 0 && tasks.map((task: Task) => (
+        <TaskItem task={task} key={task.id}/>
       ))}
 
 

@@ -14,7 +14,7 @@ export function Dropdown({ button, children, dropdownRef }: IDropdownProps) {
 
   const ref = React.useRef<HTMLDivElement>(null);
   const rect = ref.current?.getBoundingClientRect();
-  
+
   React.useEffect(() => {
     function handleClickClose(event: MouseEvent) {
       if (event.target instanceof Node && !ref.current?.contains(event.target) && !dropdownRef.current?.contains(event.target)) {
