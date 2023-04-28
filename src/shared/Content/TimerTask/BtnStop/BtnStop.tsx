@@ -1,8 +1,20 @@
 import React from 'react';
 import styles from './btnstop.module.css';
 
-export function BtnStop() {
+interface IBtnStopProps {
+  isPaused: boolean;
+  isStarted: boolean;
+  handleCickDone: () => void;
+  handleCickStop: () => void;
+}
+
+export function BtnStop({ isPaused, isStarted, handleCickDone, handleCickStop}: IBtnStopProps) {
+
+
   return (
-    <button className={styles.btnStop}>Стоп</button>
+    isPaused && isStarted
+      ? <button className={styles.btnStop} onClick={handleCickDone}>Сделано</button>
+      : <button className={styles.btnStop} onClick={handleCickStop}>Стоп</button>
+
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch } from '../../../../../hooks/hook';
-import { decreaseTomatos, increaseTomatos, removeTask } from '../../../../../store/taskSlice';
+import { decreaseTomatos, increaseTomatos } from '../../../../../store/taskSlice';
 import { Dropdown } from '../../../../Dropdown';
 import styles from './menu.module.css';
 import { MenuIcon } from './MenuIcon';
@@ -25,13 +25,6 @@ export function Menu({id, amountTomatos, handleEditTask}: IMenuProps) {
     dispatch(decreaseTomatos({id}));
   }
 
-  // function handleEditTask() {
-  //   // dispatch(addTask(text));
-  // }
-
-  function handleRemoveTask() {
-    dispatch(removeTask({id}));
-  }
 
   return (
     <div className={styles.menu}>
@@ -50,7 +43,6 @@ export function Menu({id, amountTomatos, handleEditTask}: IMenuProps) {
             handleIncreaseTomatos={handleIncreaseTomatos}
             handleDecreaseTomatos={handleDecreaseTomatos}
             handleEditTask={handleEditTask}
-            handleRemoveTask={handleRemoveTask}
           />
         </div>
       </Dropdown>

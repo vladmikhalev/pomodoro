@@ -8,7 +8,8 @@
   padding: 19px 40px;
   align-items: center;
   justify-content: space-between;
-  background-color: #C4C4C4;
+  transition: all 0.2 ease-in-out;
+  /* background-color: #C4C4C4; */
 }
 
 .headerTask {
@@ -29,6 +30,7 @@
 
 
 .content {
+  position: relative;
   display: flex;
   padding: 70px 0 107px 0;
   flex-direction: column;
@@ -37,14 +39,17 @@
 }
 
 .timer {
-  display: flex;
-  margin-left: 75px;
-  align-items: center;
+  /* position: relative; */
+  /* display: flex; */
+  /* margin-left: 75px; */
+  /* padding: 0 40px; */
+  /* align-items: center; */
   font-style: normal;
   font-weight: 200;
   font-size: 150px;
   line-height: 179px;
   color: #333333;
+  transition: color 0.2 ease-in-out;
 }
 
 .task {
@@ -63,7 +68,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  max-width: 308px;
-  width: 100%;
+  /* justify-content: space-between; */
+  /* max-width: 308px;
+  width: 100%; */
 }

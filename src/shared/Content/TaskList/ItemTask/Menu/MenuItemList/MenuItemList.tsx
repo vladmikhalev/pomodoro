@@ -10,10 +10,9 @@ interface MenuItemListProps {
   handleIncreaseTomatos: () => void;
   handleDecreaseTomatos: () => void;
   handleEditTask: () => void;
-  handleRemoveTask: () => void;
 }
 
-export function MenuItemList({ id, amountTomatos, handleIncreaseTomatos, handleDecreaseTomatos, handleEditTask, handleRemoveTask }: MenuItemListProps) {
+export function MenuItemList({ id, amountTomatos, handleIncreaseTomatos, handleDecreaseTomatos, handleEditTask }: MenuItemListProps) {
   const [isDisable, setIsDisable] = React.useState('false');
 
   React.useEffect(() => {
@@ -49,10 +48,6 @@ export function MenuItemList({ id, amountTomatos, handleIncreaseTomatos, handleD
             <IconDelete />
             <span className={styles.itemText}>Удалить</span>
           </Link>
-          {/* <button className={styles.itemBtn} onClick={() => { setIsModalOpen(true); }} >
-            <IconDelete />
-            <span className={styles.itemText}>Удалить</span>
-          </button> */}
         </li>
       </ul>
 

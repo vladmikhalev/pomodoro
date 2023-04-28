@@ -5,7 +5,11 @@ import { nanoid } from 'nanoid';
 export type Task = {
   id: string;
   title: string;
+  ordinalNumber: number;
   amountTomatos: number;
+  timeTimer: number;
+  isPaused: boolean;
+  isStarted: boolean;
 };
 
 type TasksState = {
@@ -30,6 +34,22 @@ interface IPayloadEdit {
   title: string;
 }
 
+interface IPayloadSetTime {
+  id: string;
+  time: number;
+}
+
+interface IPayloadSetIsPaused {
+  id: string;
+  isPaused: boolean;
+}
+
+interface IPayloadSetIsStarted {
+  id: string;
+  isStarted: boolean;
+}
+
+
 
 const taskSlice = createSlice({
   name: 'tasks',
@@ -40,7 +60,11 @@ const taskSlice = createSlice({
       state.list.push({
         id: nanoid(10),
         title: action.payload.title,
+        ordinalNumber: state.list.length + 1,
         amountTomatos: 1,
+        timeTimer: 25 * 60 * 1000,
+        isPaused: false,
+        isStarted: false,
       });
     },
     removeTask(state, action: PayloadAction<IPayloadId>) {
@@ -64,8 +88,26 @@ const taskSlice = createSlice({
         targetTask.amountTomatos -= 1;
       }
     },
+    setTimeTimer(state, action: PayloadAction<IPayloadSetTime>) {
+      const targetTask = state.list.find(task => task.id === action.payload.id);
+      if (targetTask) {
+        targetTask.timeTimer = action.payload.time;
+      }
+    },
+    setIsPaused(state, action: PayloadAction<IPayloadSetIsPaused>) {
+      const targetTask = state.list.find(task => task.id === action.payload.id);
+      if (targetTask) {
+        targetTask.isPaused = action.payload.isPaused;
+      }
+    },
+    setIsStarted(state, action: PayloadAction<IPayloadSetIsStarted>) {
+      const targetTask = state.list.find(task => task.id === action.payload.id);
+      if (targetTask) {
+        targetTask.isStarted = action.payload.isStarted;
+      }
+    },
   },
 });
 
-export const { addTask, removeTask, increaseTomatos, decreaseTomatos, editTask } = taskSlice.actions;
+export const { addTask, removeTask, increaseTomatos, decreaseTomatos, editTask, setTimeTimer, setIsPaused, setIsStarted } = taskSlice.actions;
 export default taskSlice.reducer;

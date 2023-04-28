@@ -4,8 +4,15 @@ import styles from './content.module.css';
 import { TimerTask } from './TimerTask';
 import { TaskList } from './TaskList';
 import { FormAddTask } from './FormAddTask';
+import { WorkTime } from './WorkTime';
+import { useAppSelector } from '../../hooks/hook';
+
+
+
 
 export function Content() {
+  const tasks = useAppSelector(state => state.tasks.list);
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -15,11 +22,12 @@ export function Content() {
             <Description />
             <FormAddTask />
             <TaskList />
+            {tasks.length !== 0 && <WorkTime tasks={tasks} />}
           </div>
-          <TimerTask />
+          {tasks && tasks.length !== 0 && <TimerTask tasks={tasks} />}
+
         </div>
       </div>
     </section>
-
   );
 }
