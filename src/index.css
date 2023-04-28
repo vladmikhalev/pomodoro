@@ -1,13 +1,121 @@
+@import-normalize;
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+
+/* glob */
+
+html {
+  box-sizing: border-box;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+button:focus:not(:focus-visible) {
+  outline: unset;
+}
+
+button {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+@font-face {
+  font-family: "SFUIDisplay";
+  src: local("SFUIDisplay-Bold"),
+    url("../public/assets/fonts/SFUIDisplay-Bold.woff2") format("woff2"),
+    url("../public/assets/fonts/SFUIDisplay-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SFUIDisplay";
+  src: local("SFUIDisplay-Medium"),
+    url("../public/assets/fonts/SFUIDisplay-Medium.woff2") format("woff2"),
+    url("../public/assets/fonts/SFUIDisplay-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SFUIDisplay";
+  src: local("SFUIDisplay-Regular"),
+    url("../public/assets/fonts/SFUIDisplay-Regular.woff2") format("woff2"),
+    url("../public/assets/fonts/SFUIDisplay-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SFUIDisplay";
+  src: local("SFUIDisplay-Light"),
+    url("../public/assets/fonts/SFUIDisplay-Light.woff2") format("woff2"),
+    url("../public/assets/fonts/SFUIDisplay-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SFUIDisplay";
+  src: local("SFUIDisplay-Thin"),
+    url("../public/assets/fonts/SFUIDisplay-Thin.woff2") format("woff2"),
+    url("../public/assets/fonts/SFUIDisplay-Thin.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  min-width: 320px;
+  font-family: "SFUIDisplay", sans-serif;
+  font-weight: 400;
+}
+
+:root {
+  --black-color: #000;
+  --white-color: #fff;
+  --text-color: #333;
+  --green-color: #A8B64F;
+  --green-hover-color: #899441;
+  --red-color: #DC3E22;
+  --red-hover-color: #B7280F;
+}
+
+/* ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+} */
+
+/* .btn-reset {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+} */

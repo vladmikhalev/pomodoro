@@ -1,0 +1,14 @@
+.editInput {
+  width: 100%;
+  max-width: 300px;
+  outline: none;
+  border: none;
+  margin-left: -5px;
+  padding: 4px 5px;
+  background-color: #F4F4F4;
+  font-family: "SFUIDisplay", sans-serif;
+  font-weight: 300!important;
+  font-size: 16px;
+  line-height: 18px;
+  color: #333333;
+}

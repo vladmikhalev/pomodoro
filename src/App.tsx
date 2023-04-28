@@ -1,25 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Content } from './shared/Content';
+import { Header } from './shared/Header';
+import { Main } from './shared/Main';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { NotFound } from './shared/NotFound';
+import { Statistics } from './Statistics';
+
+
 
 function App() {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload. 
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Main >
+          <Routes>
+            <Route path="/" element={<Navigate to="/timer" />} />
+
+            <Route path="/timer/*" element={<Content />} />
+            
+            <Route path="/statistics/*" element={<Statistics />} />
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Main>
+      </BrowserRouter>
+    </>
   );
 }
 

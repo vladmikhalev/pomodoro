@@ -1,0 +1,41 @@
+.descr {
+  max-width: 530px;
+  margin-bottom: 25px;
+}
+
+.subtitle {
+  margin: 0;
+  margin-bottom: 5px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #333333;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 23px;
+}
+
+.item {
+  position: relative;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 33px;
+  color: #333333;
+}
+
+.item:before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: -23px;
+  margin: auto 0;
+  width: 4.52px;
+  height: 4.52px;
+  margin-right: 16px;
+  border-radius: 100%;
+  background-color: var(--red-hover-color);
+}

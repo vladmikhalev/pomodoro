@@ -1,0 +1,15 @@
+.btnStart {
+  padding: 19px 50px;
+  margin-right: 25px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: var(--green-color);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btnStart:hover {
+  background-color: var(--green-hover-color);
+}

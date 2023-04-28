@@ -1,0 +1,60 @@
+.header {
+  box-shadow: 0 1px 100px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 15px 80px;
+
+}
+
+.logoBtn {
+  display: flex;
+  align-items: center;
+
+}
+
+.logoBtn:hover .logoText {
+  color: var(--red-hover-color);
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+}
+
+.logoText {
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: var(--red-color);
+  transition: color 0.2s ease-in-out;
+}
+
+.statisticsBtn:hover path{
+  fill: var(--red-hover-color);
+}
+.statisticsBtn:hover .statisticsText{
+  color: var(--red-hover-color);
+}
+
+.statisticsSvg {
+  margin-right: 5px;
+}
+.statisticsSvg path {
+  transition: fill 0.2s ease-in-out
+}
+
+.statisticsText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 17px;
+  color: var(--red-color);
+  transition: color 0.2s ease-in-out;
+}

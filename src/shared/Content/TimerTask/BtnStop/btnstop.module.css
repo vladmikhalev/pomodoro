@@ -1,0 +1,18 @@
+.btnStop {
+  margin: -2px;
+  padding: 17px 48px;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17px;
+  text-align: center;
+  color: #DC3E22;
+  border: 2px solid var(--red-color);
+  transition: all 0.2s ease-in-out;
+}
+
+
+.btnStop:hover {
+  background-color: var(--red-color);
+  color: var(--white-color);
+}
