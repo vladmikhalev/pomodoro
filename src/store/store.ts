@@ -3,10 +3,11 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 
 import taskReducer from './taskSlice';
+import statisticsReducer from './statisticsSlice';
 
 const rootReducer = combineReducers({
   tasks: taskReducer,
-  // statistics: statisticsReducer,
+  statistics: statisticsReducer,
 });
 
 const persistConfig = {

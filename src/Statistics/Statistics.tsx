@@ -1,31 +1,49 @@
 import React from 'react';
-// import Select from 'react-select';
+import { useAppSelector } from '../hooks/hook';
+import { TStatistics } from '../store/statisticsSlice';
+import { IObject } from '../store/statisticsSlice';
+import { ChartBlock } from './ChartBlock';
+import { HeaderChart } from './HeaderChart';
 import styles from './statistics.module.css';
+import { StatisticsCard } from './StatisticsCard';
 
-// const options = [
-//   { value: 'chocolate', label: 'Chocolate' },
-//   { value: 'strawberry', label: 'Strawberry' },
-//   { value: 'vanilla', label: 'Vanilla' },
-// ];
+
 
 export function Statistics() {
-  // const [selectedOption, setSelectedOption] = React.useState(null);
+  const daysList = useAppSelector(state => state.statistics);
+  const [selectedOption, setSelectedOption] = React.useState('Эта неделя');
+  const [filteredList, setFilteredList] = React.useState<TStatistics>(daysList.slice(0, 7));
+  const [dailyStatistics, setDailyStatistics] = React.useState<IObject>();
+  
+  React.useEffect(() => {
+    console.log(filteredList);
+
+    switch (selectedOption) {
+    case 'Эта неделя':
+      setFilteredList(daysList.slice(0, 7));
+      break;
+    case 'Прошедшая неделя':
+      setFilteredList(daysList.slice(7, 14));
+      break;
+    case '2 недели назад':
+      setFilteredList(daysList.slice(14, 21));
+      break;
+    default:
+      break;
+    }
+  }, [selectedOption]);
+
+
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        {/* <div className={styles.content}> */}
-        <div className={styles.header}>
-          <h2 className={styles.title}>Ваша активность</h2>
-          {/* <Select
-            defaultValue={selectedOption}
-            onChange={setSelectedOption}
-            options={options}
-          /> */}
-        </div>
-        <div className={styles.graf}></div>
-        <div className={styles.statist}></div>
-        {/* </div> */}
+        <HeaderChart
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+        />
+        <ChartBlock filteredList={filteredList} dailyStatistics={dailyStatistics} setDailyStatistics={setDailyStatistics} />
+        <StatisticsCard dailyStatistics={dailyStatistics} />
       </div>
     </section >
 

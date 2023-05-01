@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { nanoid } from 'nanoid';
 
 
 export type Task = {
@@ -23,6 +22,7 @@ const initialState: TasksState = {
 
 interface IPayloadAdd {
   title: string;
+  id: string;
 }
 
 interface IPayloadId {
@@ -56,9 +56,8 @@ const taskSlice = createSlice({
   initialState,
   reducers: {
     addTask(state, action: PayloadAction<IPayloadAdd>) {
-
       state.list.push({
-        id: nanoid(10),
+        id: action.payload.id,
         title: action.payload.title,
         ordinalNumber: state.list.length + 1,
         amountTomatos: 1,

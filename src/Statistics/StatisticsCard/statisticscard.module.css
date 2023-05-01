@@ -1,0 +1,42 @@
+.statist {
+  display: flex;
+  ;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card {
+  width: 405px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px;
+}
+
+.card:nth-child(1) {
+  background-color: #FFDDA9;
+}
+
+.card:nth-child(2) {
+  background-color: #DFDCFE;
+}
+
+.card:nth-child(3) {
+  background-color: #C5F1FF;
+}
+
+.subtitle {
+  margin: 0;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #333333;
+}
+
+.percent {
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 76px;
+  color: #333333;
+}

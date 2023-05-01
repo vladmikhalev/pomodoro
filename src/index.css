@@ -119,3 +119,9 @@ body {
   cursor: pointer;
   background-color: transparent;
 } */
+
+
+@import './react-select.scss';
+
+
+

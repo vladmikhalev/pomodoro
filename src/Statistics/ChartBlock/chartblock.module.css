@@ -1,0 +1,109 @@
+.chartBlock {
+  display: grid;
+  grid-auto-columns: minmax(auto, 296px) auto;
+  grid-auto-rows: auto minmax(179px, auto) ;
+  grid-gap: 32px;
+  margin-bottom: 32px;
+}
+
+.dailyInfo {}
+
+.wrapper {
+  padding: 25px;
+  background-color: #F4F4F4;
+}
+
+
+
+
+.subtitle {
+  margin: 0;
+  margin-bottom: 14px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #333333;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: #333333;
+}
+
+.text span {
+  color: var(--red-color);
+}
+
+
+.tomatoAmount {
+  background-color: #F4F4F4;
+}
+
+
+
+
+
+
+
+.tomat {
+  padding: 23px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tomat span {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #999999;
+}
+
+.tomat img {
+  height: 81px;
+  width: 81px;
+  margin-right: 15px;
+}
+
+
+
+
+.textTomato {
+  margin: 0;
+  padding: 9px 0;
+  width: 100%;
+  background-color: var(--red-color);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+
+
+
+
+.chart {
+  background-color: antiquewhite;
+  grid-column: 2;
+  grid-row: 1/3;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
