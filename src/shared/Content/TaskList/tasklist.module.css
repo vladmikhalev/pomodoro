@@ -3,3 +3,34 @@
   margin: 0;
   padding: 0;
 }
+
+@keyframes fade-in {
+  0%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100%{
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0%{
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100%{
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+}
+.itemExitActive{
+  animation: fade-out 500ms forwards ;
+}
+.itemEnterActive{
+  animation: fade-in 500ms forwards;
+}
+
+
+

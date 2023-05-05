@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { useAppDispatch } from '../../../hooks/hook';
-import { removeTaskStatistics, updateAmountStops, updateComplitedTomatos, updatePauseTime, updateTimeStampStartPause } from '../../../store/statisticsSlice';
-import { removeTask, setIsPaused, setIsStarted, setTimeTimer, Task } from '../../../store/taskSlice';
+import { removeTaskStatistics, unsetStatistics, updateAmountStops, updateComplitedTomatos, updatePauseTime, updateTimeStampStartPause, updateTimeStampStartTusk, updateWorkTime } from '../../../store/statisticsSlice';
+import { removeTask, setBreakCount, setCurrentPomodoro, setIsPaused, setIsStarted, setTimerType, setTimeTimer, Task, unsetTask } from '../../../store/taskSlice';
 import { getTimerTime } from '../../../utils/function/getTimerTime';
 import { BtnAddTime } from './BtnAddTime';
+import { BtnMiss } from './BtnMiss';
 import { BtnPause } from './BtnPause';
 import { BtnStart } from './BtnStart';
 import { BtnStop } from './BtnStop';
@@ -15,22 +16,9 @@ interface ITimerTaskProps {
 }
 
 export function TimerTask({ tasks }: ITimerTaskProps) {
-  // const [breakCount, setBreakCount] = React.useState(0);
-  
   const dispatch = useAppDispatch();
-  const currentTask = tasks[0];
-  console.log(currentTask);
+  const currentTask =  tasks[0];
   const timertime = getTimerTime(currentTask.timeTimer);
-
-  // React.useEffect(() => {
-  // }, [currentTask.amountTomatos]);
-
-  // function cycleTimer() {
-  //   for (let i = 0; i < currentTask.amountTomatos; i++) {
-  //     console.log('one tomatos');
-  //   }
-  // }
-
 
   function handleCickDone() {
     dispatch(updateComplitedTomatos({ id: currentTask.id }));
@@ -38,57 +26,138 @@ export function TimerTask({ tasks }: ITimerTaskProps) {
   }
 
   function handleCickStop() {
-    dispatch(removeTaskStatistics({ id: currentTask.id }));
-    dispatch(removeTask({ id: currentTask.id }));
+    stopTimer();
   }
 
   function handleClickStart() {
-    dispatch(setIsStarted({ id: currentTask.id, isStarted: true }));
-
-
-
-
-
+    startTimer();
   }
 
   function handleClickPause() {
-    if (currentTask.isPaused) {
-      dispatch(updatePauseTime({ id: currentTask.id, timeStampFinish: Date.now() }));
-    } else {
-      dispatch(updateAmountStops({ id: currentTask.id }));
-      dispatch(updateTimeStampStartPause({ id: currentTask.id, timeStampStart: Date.now() }));
+    if (currentTask.timerType === 0) {
+      if (currentTask.isPaused) {
+        dispatch(updatePauseTime({ id: currentTask.id, timeStampFinish: Date.now() }));
+      } else {
+        dispatch(updateAmountStops({ id: currentTask.id }));
+        dispatch(updateTimeStampStartPause({ id: currentTask.id, timeStampStart: Date.now() }));
+      }
     }
     dispatch(setIsPaused({ id: currentTask.id, isPaused: !currentTask.isPaused }));
   }
 
-  // function startTimerTask() {
+  function handleCickMiss() {
+    dispatch(setTimeTimer({ id: currentTask.id, time: 0 }));
+    dispatch(setIsPaused({ id: currentTask.id, isPaused: false }));
+  }
 
-  // }
+  React.useEffect(() => {
+    if (currentTask.isStarted === true && currentTask.isPaused === false && currentTask.timerType === 0) {
+      // начало дела
+      dispatch(updateTimeStampStartTusk({ id: currentTask.id, timeStampStart: Date.now() }));
+    }
+    if (currentTask.isStarted === true && currentTask.isPaused === true && currentTask.timerType === 0) {
+      // поставлено на паузу
+      dispatch(updateWorkTime({ id: currentTask.id, timeStampFinish: Date.now() }));
+    }
+   
+  }, [currentTask.isStarted, currentTask.isPaused, currentTask.timerType]);
 
 
-  // Логика таймера
+
+  const tick = () => {
+    dispatch(setTimeTimer({ id: currentTask.id, time: currentTask.timeTimer - 1000 }));
+  };
+
+
   React.useEffect(() => {
     if (!currentTask.isPaused && currentTask.isStarted) {
-      const intervalId = setInterval(() => {
-        dispatch(setTimeTimer({ id: currentTask.id, time: currentTask.timeTimer - 1000 }));
+      let intervalId: any = null;
 
-      }, 1000);
+      if (currentTask.timeTimer > 0) {
+        // Таймер работает
+        intervalId = setInterval(tick, 1000);
+      } else {
+        // Таймер истек, переключаемся на перерыв или следующий помидор
+        clearInterval(intervalId);
+
+        if (currentTask.timerType === 0) {
+          dispatch(updateWorkTime({ id: currentTask.id, timeStampFinish: Date.now() }));
+          // Таймер рабочего времени истек, переключаемся на перерыв
+          if (currentTask.breakCount % 4 === 0) {
+            // Запускается четвертый длинный таймер
+            dispatch(setBreakCount({ id: currentTask.id, breakCount: currentTask.breakCount + 1 }));
+            dispatch(setTimeTimer({ id: currentTask.id, time: 0.3 * 60 * 1000 }));
+            dispatch(setTimerType({ id: currentTask.id, timerType: 1 }));
+          } else {
+            // запускается обычный таймер
+            dispatch(setBreakCount({ id: currentTask.id, breakCount: currentTask.breakCount + 1 }));
+            dispatch(setTimeTimer({ id: currentTask.id, time: 0.2 * 60 * 1000 }));
+            dispatch(setTimerType({ id: currentTask.id, timerType: 1 }));
+          }
+        } else {
+          // Таймер перерыва истек, переключаемся на следующий помидор
+          if (currentTask.currentPomodoro < currentTask.amountTomatos) {
+            dispatch(setTimeTimer({ id: currentTask.id, time: 0.5 * 60 * 1000 }));
+            dispatch(setTimerType({ id: currentTask.id, timerType: 0 }));
+            dispatch(setCurrentPomodoro({ id: currentTask.id }));
+            dispatch(updateComplitedTomatos({ id: currentTask.id }));
+            // Таймер перерыва истек, переключаемся на ПОСЛЕДНИЙ помидор  
+          } else {
+            // время таймера истекло дело незасчитывается, удаляем дело и статистику по нему 
+            dispatch(removeTask({ id: currentTask.id }));
+            dispatch(removeTaskStatistics({ id: currentTask.id }));
+            return;
+          }
+        }
+      }
       return () => clearInterval(intervalId);
     }
-  }, [currentTask.timeTimer, currentTask.isPaused, currentTask.isStarted]);
+  }, [currentTask.timeTimer, currentTask.timerType, currentTask.currentPomodoro, currentTask.isPaused, currentTask.isStarted]);
 
+  const startTimer = () => {
+    dispatch(setIsStarted({ id: currentTask.id, isStarted: true }));
+    dispatch(setTimerType({ id: currentTask.id, timerType: 0 }));
+  };
 
+  const stopTimer = () => {
+    // останавливаем таймер, возвращаем его в первоначальное состояние и сбрасываем статитстику 
+    dispatch(unsetTask({ id: currentTask.id }));
+    dispatch(unsetStatistics({ id: currentTask.id }));
+  };
 
+  const bkgrColorHeader = () => {
+    if (currentTask.isStarted) {
+      if (currentTask.timerType === 1) {
+        return '#A8B64F';
+      } else {
+        return '#DC3E22';
+      }
+    } else {
+      return '#C4C4C4';
+    }
+  };
+
+  const bkgrColorTimer = () => {
+    if (currentTask.isStarted && !currentTask.isPaused) {
+      if (currentTask.timerType === 1) {
+        return '#A8B64F';
+      } else {
+        return '#DC3E22';
+      }
+    } else {
+      return '#333333';
+    }
+  };
 
   return (
     <div className={styles.timerTask}>
-      <div className={styles.header} style={{ backgroundColor: currentTask.isStarted ? '#DC3E22' : '#C4C4C4' }}>
+      <div className={styles.header} style={{ backgroundColor: bkgrColorHeader() }}>
         <span className={styles.headerTask}>{currentTask.title}</span>
-        <span className={styles.numberPomodor}>Помидор {currentTask.amountTomatos}</span>  {/* !!!!текущий выполняемый помидор!!!*/}
+        <span className={styles.numberPomodor}>Помидор {currentTask.currentPomodoro}</span>  
       </div>
       <div className={styles.content}>
         <div className={styles.timer}>
-          <span style={{ color: currentTask.isStarted && !currentTask.isPaused ? '#DC3E22' : '#333333' }}>{timertime}</span>
+          <span style={{ color: bkgrColorTimer() }}>{timertime}</span>
           <BtnAddTime id={currentTask.id} timeTimer={currentTask.timeTimer} />
         </div>
         <span className={styles.task}>
@@ -106,7 +175,17 @@ export function TimerTask({ tasks }: ITimerTaskProps) {
                 handleClickStart={handleClickStart}
               />
           }
-          <BtnStop isPaused={currentTask.isPaused} isStarted={currentTask.isStarted} handleCickDone={handleCickDone} handleCickStop={handleCickStop} />
+          {
+            currentTask.timerType === 1
+              ? <BtnMiss handleCickMiss={handleCickMiss} />
+              : <BtnStop
+                isPaused={currentTask.isPaused}
+                isStarted={currentTask.isStarted}
+                handleCickDone={handleCickDone}
+                handleCickStop={handleCickStop}
+              />
+          }
+        
         </div>
       </div>
     </div>

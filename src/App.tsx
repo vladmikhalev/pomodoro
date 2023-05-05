@@ -15,7 +15,6 @@ import { updateList } from './store/statisticsSlice';
 function App() {
   const dispatch = useAppDispatch();
   const daysList = useAppSelector(state => state.statistics);
-  console.log(daysList);
 
   React.useEffect(() => {
     checkStore();
@@ -23,6 +22,8 @@ function App() {
 
   function checkStore() {
     const timestamp = getTimestampDay(new Date());
+    // console.log(timestamp);
+    // console.log(daysList[0].timeStamp);
 
     if (daysList[0].timeStamp !== timestamp) {
       dispatch(updateList());

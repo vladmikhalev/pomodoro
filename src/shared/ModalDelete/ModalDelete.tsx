@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/hook';
+import { removeTaskStatistics } from '../../store/statisticsSlice';
 import { removeTask } from '../../store/taskSlice';
 import { IconExitModal } from '../icons';
 import styles from './modaldelete.module.css';
@@ -28,6 +29,7 @@ export function ModalDelete({ id }: IModalDeleteProps) {
 
   function handleRemove() {
     dispatch(removeTask({ id }));
+    dispatch(removeTaskStatistics({ id: id }));
     navigate('/timer');
   }
   

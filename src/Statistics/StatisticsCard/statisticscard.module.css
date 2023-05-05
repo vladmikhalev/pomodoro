@@ -13,17 +13,6 @@
   padding: 25px;
 }
 
-.card:nth-child(1) {
-  background-color: #FFDDA9;
-}
-
-.card:nth-child(2) {
-  background-color: #DFDCFE;
-}
-
-.card:nth-child(3) {
-  background-color: #C5F1FF;
-}
 
 .subtitle {
   margin: 0;

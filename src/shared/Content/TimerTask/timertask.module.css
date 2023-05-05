@@ -9,7 +9,6 @@
   align-items: center;
   justify-content: space-between;
   transition: all 0.2 ease-in-out;
-  /* background-color: #C4C4C4; */
 }
 
 .headerTask {
@@ -39,11 +38,6 @@
 }
 
 .timer {
-  /* position: relative; */
-  /* display: flex; */
-  /* margin-left: 75px; */
-  /* padding: 0 40px; */
-  /* align-items: center; */
   font-style: normal;
   font-weight: 200;
   font-size: 150px;
@@ -68,7 +62,5 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* justify-content: space-between; */
-  /* max-width: 308px;
-  width: 100%; */
 }
+
