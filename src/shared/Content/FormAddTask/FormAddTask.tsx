@@ -1,5 +1,7 @@
+import { nanoid } from 'nanoid';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch } from '../../../hooks/hook';
+import { addTaskStatistics } from '../../../store/statisticsSlice';
 import { addTask } from '../../../store/taskSlice';
 import styles from './formaddtask.module.css';
 
@@ -12,7 +14,9 @@ export function FormAddTask() {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (title.trim().length) {
-      dispatch(addTask({title}));
+      const id = nanoid(10);
+      dispatch(addTask({ title, id: id }));
+      dispatch(addTaskStatistics({ id: id, nameTask: title }));
       setTitle('');
     }
   }

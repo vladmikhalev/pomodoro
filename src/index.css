@@ -107,15 +107,9 @@ body {
   --red-hover-color: #B7280F;
 }
 
-/* ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-} */
 
-/* .btn-reset {
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-} */
+
+@import './react-select.scss';
+
+
+

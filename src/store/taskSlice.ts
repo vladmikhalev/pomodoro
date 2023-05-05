@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { nanoid } from 'nanoid';
 
 
 export type Task = {
@@ -10,6 +9,9 @@ export type Task = {
   timeTimer: number;
   isPaused: boolean;
   isStarted: boolean;
+  breakCount: number;
+  timerType: number;
+  currentPomodoro: number;
 };
 
 type TasksState = {
@@ -23,10 +25,21 @@ const initialState: TasksState = {
 
 interface IPayloadAdd {
   title: string;
+  id: string;
 }
 
 interface IPayloadId {
   id: string;
+}
+
+interface IPayloadIncreaseBreakCount {
+  id: string;
+  breakCount: number;
+}
+
+interface IPayloadSetTimerType {
+  id: string;
+  timerType: number;
 }
 
 interface IPayloadEdit {
@@ -56,15 +69,17 @@ const taskSlice = createSlice({
   initialState,
   reducers: {
     addTask(state, action: PayloadAction<IPayloadAdd>) {
-
       state.list.push({
-        id: nanoid(10),
+        id: action.payload.id,
         title: action.payload.title,
         ordinalNumber: state.list.length + 1,
         amountTomatos: 1,
-        timeTimer: 25 * 60 * 1000,
+        timeTimer: 0.5 * 60 * 1000,
         isPaused: false,
         isStarted: false,
+        breakCount: 1,
+        timerType: 0,
+        currentPomodoro: 1,
       });
     },
     removeTask(state, action: PayloadAction<IPayloadId>) {
@@ -106,8 +121,36 @@ const taskSlice = createSlice({
         targetTask.isStarted = action.payload.isStarted;
       }
     },
+    setBreakCount(state, action: PayloadAction<IPayloadIncreaseBreakCount>) {
+      const targetTask = state.list.find(task => task.id === action.payload.id);
+      if (targetTask) {
+        targetTask.breakCount = action.payload.breakCount;
+      }
+    },
+    setTimerType(state, action: PayloadAction<IPayloadSetTimerType>) {
+      const targetTask = state.list.find(task => task.id === action.payload.id);
+      if (targetTask) {
+        targetTask.timerType = action.payload.timerType;
+      }
+    },
+    setCurrentPomodoro(state, action: PayloadAction<IPayloadId>) {
+      const targetTask = state.list.find(task => task.id === action.payload.id);
+      if (targetTask) {
+        targetTask.currentPomodoro += 1;
+      }
+    },
+    unsetTask(state, action: PayloadAction<IPayloadId>) {
+      const targetTask = state.list.find(task => task.id === action.payload.id);
+      if (targetTask) {
+        targetTask.timeTimer = 0.5 * 60 * 1000;
+        targetTask.isStarted = false;
+        targetTask.breakCount = 1;
+        targetTask.timerType = 0;
+        targetTask.currentPomodoro = 1;
+      }
+    },
   },
 });
 
-export const { addTask, removeTask, increaseTomatos, decreaseTomatos, editTask, setTimeTimer, setIsPaused, setIsStarted } = taskSlice.actions;
+export const { addTask, removeTask, increaseTomatos, decreaseTomatos, editTask, setTimeTimer, setIsPaused, setIsStarted, setBreakCount, setTimerType, setCurrentPomodoro, unsetTask } = taskSlice.actions;
 export default taskSlice.reducer;

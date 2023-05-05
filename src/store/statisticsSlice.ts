@@ -1,124 +1,203 @@
-
-// import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { nanoid } from 'nanoid';
-
-
-export type Statistics = {   // добавляем статистику по 1 делу когда нажимаем старт
-  id: string; //
-  date: Date;                 //  дата при создании объекта
-  allTime: number;  // 1. задаем как new Date() при старте дела 
-                    // 2. когда клик по "Сделано" сетим allTime = new Date() - allTime
-  workTime: {
-
-  }; 
-  pauseTime: {       
-    totalPauses: number;        // добавляем 1 каждый раз после клика "pause"
-    startPauseDate: Date;       // при клике на "Пауза" добавляем дату
-    endPauseDate: Date;         // при клике на "Продолжить" добавляем дату
-    time: number;               // при клике на "Продолжить" time = endPauseDate - startPauseDate
-  };         
-  complitedTomatos: number;     //  После нажатия на кнопку "Сделано" прибавляем 1 томат
-};
-
-// type TasksState = {
-//   list: Statistics[];
-// };
-
-// const initialState: TasksState = {
-//   list: [],
-// };
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getTimestampDay } from '../utils/function/getTimestampDay';
 
 
-// // interface IPayloadAdd {
-// //   title: string;
-// // }
-
-// // interface IPayloadId {
-// //   id: string;
-// // }
-
-// // interface IPayloadEdit {
-// //   id: string;
-// //   title: string;
-// // }
-
-// // interface IPayloadSetTime {
-// //   id: string;
-// //   time: number;
-// // }
-
-// // interface IPayloadSetIsPaused {
-// //   id: string;
-// //   isPaused: boolean;
-// // }
-
-// // interface IPayloadSetIsStarted {
-// //   id: string;
-// //   isStarted: boolean;
-// // }
+function fill(arr: TStatistics) {
+  const date = new Date();
+  for (let i = 0; i < 21; i++) {
+    date.setDate(date.getDate() - i);
+    arr.push({
+      timeStamp: getTimestampDay(date),
+      tasks: [],
+    });
+  }
+}
 
 
+export interface IObject {
+  id: string,                 
+  nameTask: string,           
+  pauseTimeTotal: number,     
+  timeStampStartPause: number,
+  workTime: number,
+  timeStampStartTask: number,
+  complitedTomatos: number,
+  stops: number,              
+}
 
-// const taskSlice = createSlice({
-//   name: 'tasks',
-//   initialState,
-//   reducers: {
-//     addTask(state, action: PayloadAction<IPayloadAdd>) {
+type TArrObject = IObject[];
 
-//       state.list.push({
-//         id: nanoid(10),
-//         date: new Date(),
-//         allTime: 0,
-//         workTime: 0,
-//         pauseTime: 0,
-//         pauses: 0,
-//         complitedTomatos: 0,
-//       });
-//     },
-//     removeTask(state, action: PayloadAction<IPayloadId>) {
-//       state.list = state.list.filter(task => task.id !== action.payload.id);
-//     },
-//     editTask(state, action: PayloadAction<IPayloadEdit>) {
-//       const targetTask = state.list.find(task => task.id === action.payload.id);
-//       if (targetTask) {
-//         targetTask.title = action.payload.title;
-//       }
-//     },
-//     increaseTomatos(state, action: PayloadAction<IPayloadId>) {
-//       const targetTask = state.list.find(task => task.id === action.payload.id);
-//       if (targetTask) {
-//         targetTask.amountTomatos += 1;
-//       }
-//     },
-//     decreaseTomatos(state, action: PayloadAction<IPayloadId>) {
-//       const targetTask = state.list.find(task => task.id === action.payload.id);
-//       if (targetTask && targetTask.amountTomatos > 1) {
-//         targetTask.amountTomatos -= 1;
-//       }
-//     },
-//     setTimeTimer(state, action: PayloadAction<IPayloadSetTime>) {
-//       const targetTask = state.list.find(task => task.id === action.payload.id);
-//       if (targetTask) {
-//         targetTask.timeTimer = action.payload.time;
-//       }
-//     },
-//     setIsPaused(state, action: PayloadAction<IPayloadSetIsPaused>) {
-//       const targetTask = state.list.find(task => task.id === action.payload.id);
-//       if (targetTask) {
-//         targetTask.isPaused = action.payload.isPaused;
-//       }
-//     },
-//     setIsStarted(state, action: PayloadAction<IPayloadSetIsStarted>) {
-//       const targetTask = state.list.find(task => task.id === action.payload.id);
-//       if (targetTask) {
-//         targetTask.isStarted = action.payload.isStarted;
-//       }
-//     },
-//   },
-// });
+interface IStatisticsObj {
+  timeStamp: number;
+  tasks: TArrObject
+}
 
-// export const { addTask, removeTask, increaseTomatos, decreaseTomatos, editTask, setTimeTimer, setIsPaused, setIsStarted } = taskSlice.actions;
-// export default taskSlice.reducer;
+export type TStatistics = IStatisticsObj[];
 
+const initialState: TStatistics = [];
+
+fill(initialState);
+
+
+interface IPayloadAdd {
+  id: string;
+  nameTask: string;
+}
+
+interface IPayloadUpdatePauseTime {
+  id: string;
+  timeStampFinish: number;
+}
+
+interface IPayloadUpdateWorkTime {
+  id: string;
+  timeStampFinish: number;
+}
+
+interface IPayloadUpdateTimeStampStartPause {
+  id: string;
+  timeStampStart: number;
+}
+
+interface IPayloadUpdateTimeStampStartWork {
+  id: string;
+  timeStampStart: number;
+}
+
+interface IPayloadRemoveTaskStatistics {
+  id: string;
+}
+
+interface IPayloadUpdateAmountStops {
+  id: string;
+}
+
+interface IPayloadUpdateComplitedTomatos {
+  id: string;
+}
+
+interface IPayloadUnsetStatistics {
+  id: string;
+}
+
+interface IPayloadEdit {
+  id: string;
+  nameTask: string;
+}
+
+
+const statisticsSlice = createSlice({
+  name: 'statistics',
+  initialState,
+  reducers: {
+    updateList(state, action: PayloadAction) {
+      state.unshift({
+        timeStamp: getTimestampDay(new Date()),
+        tasks: [],
+      });
+
+      state.pop();
+    },
+    addTaskStatistics(state, action: PayloadAction<IPayloadAdd>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      todayStatist?.tasks.push({
+        id: action.payload.id,  
+        nameTask: action.payload.nameTask,  
+        pauseTimeTotal: 0,   
+        timeStampStartPause: 0,  
+        workTime: 0,
+        timeStampStartTask: 0,  
+        complitedTomatos: 0,  
+        stops: 0,   
+      });
+    },
+    updatePauseTime(state, action: PayloadAction<IPayloadUpdatePauseTime>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      if (todayStatist) {
+        const task = todayStatist.tasks.find(item => item.id === action.payload.id);
+        if (task) {
+          task.pauseTimeTotal += action.payload.timeStampFinish - task.timeStampStartPause;
+        }
+      }
+    },
+    updateTimeStampStartPause(state, action: PayloadAction<IPayloadUpdateTimeStampStartPause>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      if (todayStatist) {
+        const task = todayStatist.tasks.find(item => item.id === action.payload.id);
+        if (task) {
+          task.timeStampStartPause = action.payload.timeStampStart;
+        }
+      }
+    },
+    updateWorkTime(state, action: PayloadAction<IPayloadUpdateWorkTime>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      if (todayStatist) {
+        const task = todayStatist.tasks.find(item => item.id === action.payload.id);
+        if (task) {
+          task.workTime += action.payload.timeStampFinish - task.timeStampStartTask;
+        }
+      }
+    },
+    updateTimeStampStartTusk(state, action: PayloadAction<IPayloadUpdateTimeStampStartWork>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      if (todayStatist) {
+        const task = todayStatist.tasks.find(item => item.id === action.payload.id);
+        if (task) {
+          task.timeStampStartTask = action.payload.timeStampStart;
+        }
+      }
+    },
+    updateAmountStops(state, action: PayloadAction<IPayloadUpdateAmountStops>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      if (todayStatist) {
+        const task = todayStatist.tasks.find(item => item.id === action.payload.id);
+        if (task) {
+          task.stops += 1;
+        }
+      }
+    },
+    updateComplitedTomatos(state, action: PayloadAction<IPayloadUpdateComplitedTomatos>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      if (todayStatist) {
+        const task = todayStatist.tasks.find(item => item.id === action.payload.id);
+        if (task) {
+          task.complitedTomatos += 1;
+        }
+      }
+    },
+    unsetStatistics(state, action: PayloadAction<IPayloadUnsetStatistics>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      if (todayStatist) {
+        const task = todayStatist.tasks.find(item => item.id === action.payload.id);
+        if (task) {
+          task.pauseTimeTotal = 0;
+          task.timeStampStartPause = 0;
+          task.workTime = 0;
+          task.complitedTomatos = 0;
+          task.stops = 0;
+        }
+      }
+    },
+    editTaskStatistics(state, action: PayloadAction<IPayloadEdit>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      if (todayStatist) {
+        const task = todayStatist.tasks.find(item => item.id === action.payload.id);
+        if (task) {
+          task.nameTask = action.payload.nameTask;
+        }
+      }
+    },
+    removeTaskStatistics(state, action: PayloadAction<IPayloadRemoveTaskStatistics>) {
+      const todayStatist = state.find(item => item.timeStamp === getTimestampDay(new Date()));
+      if (todayStatist) {
+        todayStatist.tasks = todayStatist.tasks.filter(item => item.id !== action.payload.id);
+      }
+
+    },
+  },
+});
+
+export const { updateList, updatePauseTime, removeTaskStatistics, addTaskStatistics, updateTimeStampStartPause, updateAmountStops, updateComplitedTomatos, editTaskStatistics, unsetStatistics, updateWorkTime, updateTimeStampStartTusk } = statisticsSlice.actions;
+export default statisticsSlice.reducer;
 
 

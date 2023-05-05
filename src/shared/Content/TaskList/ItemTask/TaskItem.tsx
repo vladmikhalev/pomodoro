@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../../../hooks/hook';
 import { FormEdit } from '../../../FormEdit';
 import { Route, Routes } from 'react-router-dom';
 import { ModalDelete } from '../../../ModalDelete';
+import { editTaskStatistics } from '../../../../store/statisticsSlice';
 
 interface ITaskItemProps {
   task: Task
@@ -30,9 +31,12 @@ export function TaskItem({ task }: ITaskItemProps) {
 
     if (!title.trim().length) {
       dispatch(editTask({ id: task.id, title: task.title }));
+      dispatch(editTaskStatistics({ id: task.id, nameTask: task.title }));
+      
       setTitle(task.title);
     } else {
       dispatch(editTask({ id: task.id, title: title }));
+      dispatch(editTaskStatistics({ id: task.id, nameTask: title }));
     }
     setIsEdit(false);
   }
