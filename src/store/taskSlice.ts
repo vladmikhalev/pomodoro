@@ -74,7 +74,7 @@ const taskSlice = createSlice({
         title: action.payload.title,
         ordinalNumber: state.list.length + 1,
         amountTomatos: 1,
-        timeTimer: 0.5 * 60 * 1000,
+        timeTimer: 25 * 60 * 1000,
         isPaused: false,
         isStarted: false,
         breakCount: 1,

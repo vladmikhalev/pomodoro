@@ -12,6 +12,7 @@
     "jsx-quotes": ["error", "prefer-double"],
     "indent": ["warn", 2],
     "comma-dangle": ["error", "always-multiline"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "react-hooks/exhaustive-deps": "off" 
   }
 }

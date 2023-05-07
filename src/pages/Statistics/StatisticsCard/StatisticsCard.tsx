@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPauseTime } from '../../utils/function/getPauseTime';
+import { getPauseTime } from '../../../utils/function/getPauseTime';
 import { IAcc } from '../ChartBlock';
 import styles from './statisticscard.module.css';
 

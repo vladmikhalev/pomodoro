@@ -3,9 +3,9 @@ import styles from './taskitem.module.css';
 import { Menu } from './Menu';
 import { editTask, Task } from '../../../../store/taskSlice';
 import { useAppDispatch } from '../../../../hooks/hook';
-import { FormEdit } from '../../../FormEdit';
+import { FormEdit } from '../../../../shared/FormEdit';
 import { Route, Routes } from 'react-router-dom';
-import { ModalDelete } from '../../../ModalDelete';
+import { ModalDelete } from '../../../../shared/ModalDelete';
 import { editTaskStatistics } from '../../../../store/statisticsSlice';
 
 interface ITaskItemProps {
@@ -52,7 +52,6 @@ export function TaskItem({ task }: ITaskItemProps) {
         <Menu handleEditTask={handleEditTask} id={task.id} amountTomatos={task.amountTomatos} />
       </li>
       <Routes>
-        {/* <Route path={`/remove/task-${task.id}`} element={<ModalDelete id={task.id} />} /> */}
         <Route path={'/remove-task/:id'} element={<ModalDelete id={task.id} />} />
       </Routes>
     </>

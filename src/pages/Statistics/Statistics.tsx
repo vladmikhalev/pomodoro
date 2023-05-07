@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import { useAppSelector } from '../hooks/hook';
-import { TStatistics } from '../store/statisticsSlice';
-import { IObject } from '../store/statisticsSlice';
+import { useAppSelector } from '../../hooks/hook';
+import { TStatistics } from '../../store/statisticsSlice';
+import { IObject } from '../../store/statisticsSlice';
 import { ChartBlock } from './ChartBlock';
 import { HeaderChart } from './HeaderChart';
 import styles from './statistics.module.css';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch } from '../../../../../hooks/hook';
 import { decreaseTomatos, increaseTomatos } from '../../../../../store/taskSlice';
-import { Dropdown } from '../../../../Dropdown';
+import { Dropdown } from '../../../../../shared/Dropdown';
 import styles from './menu.module.css';
 import { MenuIcon } from './MenuIcon';
 import { MenuItemList } from './MenuItemList';
