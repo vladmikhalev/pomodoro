@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IconDecrease, IconDelete, IconEdit, IconIncrease } from '../../../../../icons';
+import { IconDecrease, IconDelete, IconEdit, IconIncrease } from '../../../../../../shared/icons';
 import styles from './menuitemlist.module.css';
 
 

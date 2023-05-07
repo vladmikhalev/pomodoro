@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { useAppDispatch } from '../../../hooks/hook';
 import { removeTaskStatistics, unsetStatistics, updateAmountStops, updateComplitedTomatos, updatePauseTime, updateTimeStampStartPause, updateTimeStampStartTusk, updateWorkTime } from '../../../store/statisticsSlice';
@@ -86,18 +85,18 @@ export function TimerTask({ tasks }: ITimerTaskProps) {
           if (currentTask.breakCount % 4 === 0) {
             // Запускается четвертый длинный таймер
             dispatch(setBreakCount({ id: currentTask.id, breakCount: currentTask.breakCount + 1 }));
-            dispatch(setTimeTimer({ id: currentTask.id, time: 0.3 * 60 * 1000 }));
+            dispatch(setTimeTimer({ id: currentTask.id, time: 15 * 60 * 1000 }));
             dispatch(setTimerType({ id: currentTask.id, timerType: 1 }));
           } else {
             // запускается обычный таймер
             dispatch(setBreakCount({ id: currentTask.id, breakCount: currentTask.breakCount + 1 }));
-            dispatch(setTimeTimer({ id: currentTask.id, time: 0.2 * 60 * 1000 }));
+            dispatch(setTimeTimer({ id: currentTask.id, time: 5 * 60 * 1000 }));
             dispatch(setTimerType({ id: currentTask.id, timerType: 1 }));
           }
         } else {
           // Таймер перерыва истек, переключаемся на следующий помидор
           if (currentTask.currentPomodoro < currentTask.amountTomatos) {
-            dispatch(setTimeTimer({ id: currentTask.id, time: 0.5 * 60 * 1000 }));
+            dispatch(setTimeTimer({ id: currentTask.id, time: 25 * 60 * 1000 }));
             dispatch(setTimerType({ id: currentTask.id, timerType: 0 }));
             dispatch(setCurrentPomodoro({ id: currentTask.id }));
             dispatch(updateComplitedTomatos({ id: currentTask.id }));

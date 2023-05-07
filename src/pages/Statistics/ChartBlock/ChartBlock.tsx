@@ -13,9 +13,9 @@ import {
   InteractionItem,
 } from 'chart.js';
 import { Bar, getElementAtEvent } from 'react-chartjs-2';
-import { getWorkTime } from '../../utils/function/getWorkTime';
-import { IconTomato } from '../../shared/icons';
-import { normalizeCountForm } from '../../utils/function/normalizeCountForm';
+import { getWorkTime } from '../../../utils/function/getWorkTime';
+import { IconTomato } from '../../../shared/icons';
+import { normalizeCountForm } from '../../../utils/function/normalizeCountForm';
 
 
 export interface IAcc {
