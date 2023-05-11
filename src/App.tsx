@@ -2,7 +2,7 @@ import React from 'react';
 import { Content } from './pages/Content';
 import { Header } from './shared/Header';
 import { Main } from './shared/Main';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { NotFound } from './shared/NotFound';
 import { Statistics } from './pages/Statistics';
 import { getTimestampDay } from './utils/function/getTimestampDay';
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Main >
           <Routes>
@@ -44,7 +44,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Main>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
