@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+# Трекер задач с таймером по методу «Помодоро».       https://vladmikhalev.github.io/pomodoro/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Метод «Помодоро» — это техника управления временем, разработанная студентом колледжа Франческо Чирилло в 1980-х годах. В основе техники, названной от итальянского слова «помидор», лежат многочисленные временные интервалы, распределённые в течение дня и обозначенные на кухонном таймере в форме помидора, который Чирилло использовал сам, когда оттачивал свой метод управления временем.
 
-## Available Scripts
+## Используемые технологии:
+1. TypeScript 
+2. React
+3. Redux и Redux-persist 
+4. React-router-dom 
+5. Chart.js 
+6. React-select 
+7. Eslint 
+8. CSS Modules 
+9. react-transition-group
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Описание поведения 
+**Пользователь может выполнить на сайте следующие действия:**
+1. Работать со списком задач (добавить, редактировать, удалить, сортировать)
+Пользователь может запланировать несколько задач на свой день и для каждой задать примерное количество «помидоров», которое необходимо, чтобы её сделать. Верхняя задача из списка — это текущая задача.
+2. Работать с таймером (старт, стоп, пауза, продлить, пропустить)
+Как только пользователь готов, он запускает таймер. Если его отвлекли, то пользователь останавливает таймер, «помидорка» при этом не засчитывается. Пользователь может поставить таймер на паузу и пропустить «помидорку» или перерыв.
+3. Просматривать статистику использования таймера
+На этой странице отображается статистика по использованию приложения и некоторые полезные метрики. Пользователь может посмотреть столбчатую диаграмму с количеством часов, когда он работал с таймером. Может выбрать неделю, за которую он хочет посмотреть статистику. Может посмотреть дополнительные метрики, такие как:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Фокус (отношение времени работы с таймером ко времени, потраченному на законченные «помидорки»).
+- Время на паузе. 
+- Остановки.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Описание страниц и разделов проекта:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Основная страница с таймером
+Страница состоит из следующих блоков:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Шапка с логотипом pomodoro_box и ссылкой на страницу статистики.
 
-### `npm run eject`
+- Краткая инструкция о работе с приложением.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Форма для добавления задач.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Список задач с возможностью редактирования.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Таймер с кнопками управления.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+2. Страница со статистикой использования таймера
+Это дополнительная страница, чтобы пользователь мог следить за своим прогрессом в освоении техники «Помодоро» и видеть различные дополнительные метрики по использованию таймера.
+Страница состоит из следующих блоков:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Шапка с логотипом pomodoro_box и ссылкой на страницу статистики.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Столбчатая диаграмма времени использования таймера по дням недели.
+
+- Выбор недели.
+
+- Статистика работы с таймером за сегодня.
+
+- Фокус.
+
+- Время на паузе.
+
+- Количество остановок.
+
+
