@@ -1,4 +1,8 @@
-# Трекер задач с таймером по методу «Помодоро».       https://vladmikhalev.github.io/pomodoro/
+# Трекер задач с таймером по методу «Помодоро».     
+
+  Протестить приложение: https://vladmikhalev.github.io/pomodoro/
+
+
 <img width="400" alt="Screenshot 2023-05-19 at 17 44 57" src="https://github.com/vladmikhalev/pomodoro/assets/107835280/c87ec3c1-ac48-4fb1-808e-7c95ea819776">
 <img width="400" alt="Screenshot 2023-05-19 at 17 43 25" src="https://github.com/vladmikhalev/pomodoro/assets/107835280/2bb16cbf-b475-4135-be27-a3503112181c">
 
