@@ -27,11 +27,11 @@ function App() {
       return;
     }
   }
-
-
+  // console.log(process.env.PUBLIC_URL);
+  // basename={process.env.PUBLIC_URL}
   return (
     <>
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter >
         <Header />
         <Main >
           <Routes>
