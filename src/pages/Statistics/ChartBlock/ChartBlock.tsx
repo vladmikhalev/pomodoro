@@ -136,8 +136,6 @@ export function ChartBlock({ dailyStatistics, setDailyStatistics, weeklyStatisti
 
     const { index } = element[0];
     const dayWeek = data.labels[index];
-    // const chartValue = data.datasets[datasetIndex].data[index];
-    // console.log('день недели ', dayWeek, ' значение ', chartValue);
 
     switch (dayWeek) {
     case 'Пн':
@@ -192,34 +190,38 @@ export function ChartBlock({ dailyStatistics, setDailyStatistics, weeklyStatisti
   };
 
 
-  // console.log(weeklyStatistics);
-  // console.log(dailyStatistics);
-  // console.log(dailyStatistics.workTime);
   return (
-    <div className={styles.chartBlock} >
+    <div className={styles.chartBlock}>
       <div className={styles.wrapper}>
         <h3 className={styles.subtitle}>{dayWeek}</h3>
-        <p className={styles.text}>{dailyStatistics.workTime === 0 ? "Нет данных" : <>Вы работали над задачами в течение <span>{getWorkTime(dailyStatistics.workTime)}</span> </>} </p>
+        <p className={styles.text}>
+          {dailyStatistics.workTime === 0 ? (
+            "Нет данных"
+          ) : (
+            <>
+							Вы работали над задачами в течение <span>{getWorkTime(dailyStatistics.workTime)}</span>{" "}
+            </>
+          )}{" "}
+        </p>
       </div>
 
       <div className={styles.tomatoAmount}>
-        {
-          dailyStatistics.complitedTomatos === 0
-            ? <IconTomato />
-            : <>
-              <div className={styles.tomat}>
-                <img className={styles.imgTomato} src="/assets/images/tomato-logo.svg" alt="img pomodoro" />
-                <span>x {dailyStatistics.complitedTomatos}</span>
-              </div>
-              <p className={styles.textTomato}>{normalizeCountForm(dailyStatistics.complitedTomatos, ['помидор', 'помидора', 'помидоров'])}</p>
-            </>
-
-        }
+        {dailyStatistics.complitedTomatos === 0 ? (
+          <IconTomato />
+        ) : (
+          <>
+            <div className={styles.tomat}>
+              <img className={styles.imgTomato} src={`${process.env.PUBLIC_URL}/assets/images/tomato-logo.svg`} alt="img pomodoro" />
+              <span>x {dailyStatistics.complitedTomatos}</span>
+            </div>
+            <p className={styles.textTomato}>{normalizeCountForm(dailyStatistics.complitedTomatos, ["помидор", "помидора", "помидоров"])}</p>
+          </>
+        )}
       </div>
 
       <div className={styles.chart}>
         <Bar onClick={onClick} ref={chartRef} options={options} data={data} />
       </div>
-    </div >
+    </div>
   );
 }
