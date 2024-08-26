@@ -19,7 +19,32 @@ type TasksState = {
 };
 
 const initialState: TasksState = {
-  list: [],
+	list: [
+		{
+			id: '1',
+			title: 'Рефакторинг кода',
+			ordinalNumber: 1,
+			amountTomatos: 2,
+			timeTimer: 25 * 60 * 1000,
+			isPaused: false,
+			isStarted: false,
+			breakCount: 1,
+			timerType: 0,
+			currentPomodoro: 1,
+		},
+		{
+			id: '2',
+			title: 'Изучение английского',
+			ordinalNumber: 1,
+			amountTomatos: 3,
+			timeTimer: 25 * 60 * 1000,
+			isPaused: false,
+			isStarted: false,
+			breakCount: 5,
+			timerType: 0,
+			currentPomodoro: 2,
+		},
+	],
 };
 
 
